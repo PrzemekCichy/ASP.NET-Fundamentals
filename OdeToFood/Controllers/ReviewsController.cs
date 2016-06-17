@@ -49,23 +49,20 @@ namespace OdeToFood.Controllers
         // GET: Reviews/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var review = _reviews.Single(r => r.Id == id);
+            return View(review);
         }
 
         // POST: Reviews/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
-            try
+            var review = _reviews.Single(r => r.Id == id);
+            if (TryUpdateModel(review))
             {
-                // TODO: Add update logic here
-
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(review);
         }
 
         // GET: Reviews/Delete/5
@@ -101,7 +98,7 @@ namespace OdeToFood.Controllers
             },
                         new RestaurantReview
             {
-                Id = 1,
+                Id = 2,
                 Name = "Marakesh",
                 City = "London",
                 Country = "UK",
@@ -109,7 +106,7 @@ namespace OdeToFood.Controllers
             },
                                     new RestaurantReview
             {
-                Id = 1,
+                Id = 3,
                 Name = "The house of Elliot",
                 City = "Ghent",
                 Country = "Belgium",
